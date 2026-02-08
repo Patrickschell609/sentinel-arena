@@ -5,7 +5,7 @@ type: software
 version: 0.1.0
 date-released: 2026-02-08
 license: MIT
-repository-code: "https://github.com/ghost/sentinel-arena"
+repository-code: "https://github.com/Patrickschell609/sentinel-arena"
 keywords:
   - ai-safety
   - jailbreak

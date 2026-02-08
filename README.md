@@ -214,7 +214,7 @@ A: Output filters try to detect harm in free text (and fail 20-70% of the time).
 @software{sentinel_arena_2026,
   title={SENTINEL Arena: Capability Denial Benchmark for LLM Safety},
   year={2026},
-  url={https://github.com/ghost/sentinel-arena},
+  url={https://github.com/Patrickschell609/sentinel-arena},
   note={US Provisional Patent 63/965,457}
 }
 ```
