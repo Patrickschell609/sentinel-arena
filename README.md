@@ -1,8 +1,8 @@
 # SENTINEL Arena
 
-**Capability denial benchmark proving 0% attack success rate across 160+ jailbreak vectors.**
+**Provable AI decisioning layer. 0% attack success rate across 160+ jailbreak vectors. On-chain ZK proof of every AI decision.**
 
-SENTINEL doesn't filter LLM outputs. It reduces them to a single float. Raw text never reaches downstream. The 0% is structural, not statistical — there is no text channel for harm to flow through.
+SENTINEL doesn't filter LLM outputs. It reduces them to a single float. Raw text never reaches downstream. The 0% is structural, not statistical — there is no text channel for harm to flow through. The number protects infrastructure. The ZK proof protects the enterprise.
 
 On-chain verification: [SentinelVerifier on Base](https://basescan.org/address/0xE2467A49FB10e3804DEB7d287dae4B5BF740f54E) | [SentinelRegistry](https://basescan.org/address/0xa0329fF2e237276D3f38fC3131c0146e30280e7F)
 
@@ -50,6 +50,43 @@ User prompt ──> LLM ──> Raw response ──> SENTINEL Extractor ──> 
 Even if the model is fully jailbroken and outputs instructions for harm, only a number gets through. The number maps to SAFE or UNSAFE. The jailbreak succeeds inside the model but fails at the extraction boundary.
 
 **This is capability denial, not alignment.** We don't try to make the model safe. We make the output channel too narrow for harm to fit through.
+
+---
+
+## Not A Chatbot Tool — A Decisioning Layer
+
+SENTINEL doesn't help LLMs that need to talk. If the output is a conversation, you need text.
+
+But most high-stakes AI doesn't output conversations. **It outputs numbers:**
+
+| Industry | AI Output | What SENTINEL Proves |
+|----------|-----------|---------------------|
+| **Banking** | Credit score, fraud score, loan decision | Score was bounded [0,1], mapped to APPROVE/DENY deterministically |
+| **Insurance** | Risk assessment, claim score, premium calc | Risk score was extracted, raw model reasoning discarded |
+| **Medical** | Triage priority, diagnosis confidence, drug risk | Confidence score provably bounded, no hallucinated text in decision |
+| **Trading/DeFi** | Buy/sell signal, liquidation threshold | Signal was mathematically constrained, verified on-chain |
+| **Telecom** | Churn prediction, anomaly detection | Prediction score bounded and auditable |
+
+Every regulated industry using AI for numerical decisions is a potential application.
+
+---
+
+## The Legal Defense Layer
+
+The ZK proof isn't just safety — it's a **cryptographic receipt for every AI decision.**
+
+When a company gets sued over an AI decision — denied loan, rejected claim, wrong triage — they currently have nothing. Logs can be edited. Models get updated. The model that made the decision 3 months ago doesn't exist anymore.
+
+SENTINEL changes this. Every AI decision generates a Groth16 proof on Base containing:
+- **SHA256(input)** — exactly what was asked
+- **SHA256(response)** — exactly what the AI said
+- **Extracted score** — the number that came out
+- **Action taken** — the decision that was made
+- **Timestamp** — immutable, on-chain, unforgeable
+
+You can't forge a ZK proof. You can't edit a blockchain. You can't claim the AI said something different when the math says otherwise.
+
+**The number protects infrastructure. The ZK proof protects the enterprise.**
 
 ---
 
