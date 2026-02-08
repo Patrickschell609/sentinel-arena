@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL Arena — Benchmark Report</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --red: #d94040;
+            --amber: #d4a24e;
+            --green: #2d8c4e;
+            --green-bright: #3fb950;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--green-bright);
+        }
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .stat-value.red { color: var(--red); }
+        .stat-value.amber { color: var(--amber); }
+        .stat-value.green { color: var(--green-bright); }
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .chart-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--surface);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+        }
+        td.asr-red { color: var(--red); font-weight: bold; }
+        td.asr-amber { color: var(--amber); font-weight: bold; }
+        td.asr-green { color: var(--green-bright); font-weight: bold; }
+        .zero-badge {
+            background: var(--green);
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .explanation {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .explanation h3 {
+            color: var(--green-bright);
+            margin-bottom: 0.5rem;
+        }
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        code {
+            background: var(--surface);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>SENTINEL Arena</h1>
+    <p class="subtitle">
+        Capability Denial Benchmark — Run {{ run_id }}<br>
+        {{ timestamp }} | {{ total_attacks }} attacks | {{ models|join(', ') }}
+    </p>
+
+    <!-- Executive Summary -->
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-value red">{{ raw_asr }}%</div>
+            <div class="stat-label">Raw Model ASR</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value amber">{{ guard_asr }}%</div>
+            <div class="stat-label">Guardrailed ASR</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value green">{{ sentinel_asr }}%</div>
+            <div class="stat-label">SENTINEL ASR</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ total_attacks }}</div>
+            <div class="stat-label">Total Attacks</div>
+        </div>
+    </div>
+
+    <!-- The Chart -->
+    <h2>Attack Success Rate by Defense Strategy</h2>
+    <div class="chart-container">
+        <img src="asr_chart.png" alt="Attack Success Rate Chart">
+    </div>
+
+    <!-- Results Table -->
+    <h2>Results by Attack Category</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Attacks</th>
+                <th>Raw ASR</th>
+                <th>Guardrailed ASR</th>
+                <th>SENTINEL ASR</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in category_results %}
+            <tr>
+                <td>{{ cat.name }}</td>
+                <td>{{ cat.total }}</td>
+                <td class="asr-red">{{ cat.raw_asr }}%</td>
+                <td class="asr-amber">{{ cat.guard_asr }}%</td>
+                <td class="asr-green"><span class="zero-badge">{{ cat.sentinel_asr }}%</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Why It Works -->
+    <h2>Why SENTINEL Achieves 0%</h2>
+    <div class="explanation">
+        <h3>Capability Denial vs. Content Filtering</h3>
+        <p>
+            Traditional defenses try to <strong>detect and filter</strong> harmful content.
+            This is an arms race: attackers find new ways to bypass filters.
+        </p>
+        <p style="margin-top: 0.75rem;">
+            SENTINEL takes a fundamentally different approach: <strong>capability denial</strong>.
+            The model's only output channel is a single float [0.0-1.0]. Even if the model
+            is fully jailbroken and internally generating harmful text, only the number
+            gets through. There is no text channel for harm to flow through.
+        </p>
+        <p style="margin-top: 0.75rem;">
+            It's like giving a prisoner only a light switch — no matter how clever they are,
+            they can only flip on/off. The 0% is <strong>structural, not statistical</strong>.
+        </p>
+    </div>
+
+    <div class="explanation">
+        <h3>How the Wrapper Works</h3>
+        <p>1. System prompt asks model to output <code>{"score": 0.XX}</code></p>
+        <p>2. <strong>Extractor</strong> regex parses ONLY the first float [0.0-1.0]</p>
+        <p>3. Float maps to a predefined action enum (SAFE/UNSAFE, PROCEED/DENY)</p>
+        <p>4. Raw model text <strong>never reaches downstream</strong>. Ever.</p>
+    </div>
+
+    <!-- Methodology -->
+    <h2>Methodology</h2>
+    <div class="explanation">
+        <p><strong>Attack Sources:</strong></p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>JailbreakBench: 100 harmful behaviors (Chao et al., 2024)</li>
+            <li>CoT Hijacking: Sudoku-padded attacks (94-100% ASR in literature)</li>
+            <li>AutoDAN: Genetic-optimized prompts (Liu et al., ICLR 2024)</li>
+            <li>Encoding Evasion: Unicode/Base64/ROT13 (72% vs NeMo Guardrails)</li>
+            <li>Role-Play: DAN/Developer Mode/STAN personas</li>
+            <li>Multi-Turn: Escalation chains over 3-5 turns</li>
+            <li>Custom: GCG suffixes, crescendo, few-shot, payload splitting</li>
+        </ul>
+        <p style="margin-top: 0.75rem;">
+            <strong>Judging:</strong> Keyword-based classification with refusal/compliance
+            indicator matching. Responses scored by presence of refusal phrases vs.
+            compliance indicators (step-by-step instructions, code blocks, etc.).
+        </p>
+        <p style="margin-top: 0.75rem;">
+            <strong>Patent:</strong> US Provisional Patent Application 63/965,457
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>Generated by SENTINEL Arena v{{ version }} | Patent 63/965,457</p>
+        <p>Duration: {{ duration }}s | Cache: {{ cache_hits }} hits</p>
+    </div>
+</body>
+</html>

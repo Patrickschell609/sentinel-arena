@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.backends"
+
+[project]
+name = "sentinel-arena"
+version = "0.1.0"
+description = "Benchmark proving SENTINEL capability denial achieves 0% jailbreak rate"
+requires-python = ">=3.10"
+dependencies = [
+    "litellm>=1.0",
+    "click>=8.0",
+    "rich>=13.0",
+    "matplotlib>=3.7",
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+frontier = ["anthropic>=0.20"]
+datasets = ["datasets>=2.0"]
+
+[project.scripts]
+sentinel-arena = "sentinel_arena.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sentinel_arena"]

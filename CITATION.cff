@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use SENTINEL Arena in your research, please cite it as below."
+title: "SENTINEL Arena: Capability Denial Benchmark for LLM Safety"
+type: software
+version: 0.1.0
+date-released: 2026-02-08
+license: MIT
+repository-code: "https://github.com/ghost/sentinel-arena"
+keywords:
+  - ai-safety
+  - jailbreak
+  - benchmark
+  - capability-denial
+  - zkml
+  - zero-knowledge
+abstract: >-
+  Benchmark suite proving 0% jailbreak rate across 160+ adversarial attack
+  vectors using SENTINEL capability denial. Instead of filtering LLM outputs,
+  SENTINEL reduces them to a single float [0.0, 1.0] via strict extraction —
+  raw text never reaches downstream. Includes SDK, 7 attack categories, and
+  automated reporting. On-chain verification via Groth16 proofs on Base mainnet.
+identifiers:
+  - type: other
+    value: "US Provisional Patent 63/965,457"
+    description: "Patent covering SENTINEL extraction method"
+  - type: other
+    value: "0xE2467A49FB10e3804DEB7d287dae4B5BF740f54E"
+    description: "SentinelVerifier contract on Base mainnet"
+  - type: other
+    value: "0xa0329fF2e237276D3f38fC3131c0146e30280e7F"
+    description: "SentinelRegistry contract on Base mainnet"
