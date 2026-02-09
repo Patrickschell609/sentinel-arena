@@ -1,5 +1,5 @@
 """
-AutoDAN attacks — Genetic-optimized jailbreak prompts.
+AutoDAN attacks - Genetic-optimized jailbreak prompts.
 
 Source: Liu et al., "AutoDAN: Generating Stealthy Jailbreak Prompts on LLMs" (ICLR 2024)
 

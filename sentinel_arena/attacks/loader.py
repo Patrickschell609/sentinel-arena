@@ -1,5 +1,5 @@
 """
-Unified attack loader — loads all attack vectors from all categories.
+Unified attack loader - loads all attack vectors from all categories.
 
 Each attack is a simple dataclass with a prompt, category, and metadata.
 These are published jailbreak techniques used for defensive benchmarking.

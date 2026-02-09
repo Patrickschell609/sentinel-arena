@@ -1,5 +1,5 @@
 """
-SENTINEL Arena CLI — Entry point for running benchmarks and generating reports.
+SENTINEL Arena CLI - Entry point for running benchmarks and generating reports.
 
 Usage:
     sentinel-arena run [--models MODEL] [--categories CAT] [--limit N] [--output DIR]
@@ -30,7 +30,7 @@ console = Console()
 @click.option('--version', is_flag=True, help='Show version')
 @click.pass_context
 def main(ctx, version):
-    """SENTINEL Arena — Capability denial benchmark suite."""
+    """SENTINEL Arena - Capability denial benchmark suite."""
     if version:
         click.echo(f"sentinel-arena v{__version__}")
         return

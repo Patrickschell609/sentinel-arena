@@ -1,5 +1,5 @@
 """
-Encoding evasion attacks — Unicode, Base64, ROT13, leetspeak.
+Encoding evasion attacks - Unicode, Base64, ROT13, leetspeak.
 
 Source: NeMo Guardrails bypass research (2024-2025)
 Reported ASR: 72% against NeMo Guardrails with encoding tricks

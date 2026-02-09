@@ -1,5 +1,5 @@
 """
-SENTINEL Commitment — SHA256 hash commitment for audit trail.
+SENTINEL Commitment - SHA256 hash commitment for audit trail.
 
 Every SENTINEL decision produces a cryptographic commitment:
   SHA256(score | action | timestamp | model_id)

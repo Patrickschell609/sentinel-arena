@@ -1,5 +1,5 @@
 """
-Charts — The money shot grouped bar chart.
+Charts - The money shot grouped bar chart.
 
 Generates the grouped bar chart that tells the whole story:
 Every attack category on the Y-axis, three bars per category

@@ -1,5 +1,5 @@
 """
-JailbreakBench attacks — 100 harmful behaviors from the JBB dataset.
+JailbreakBench attacks - 100 harmful behaviors from the JBB dataset.
 
 Source: https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors
 Paper: Chao et al., "JailbreakBench: An Open Robustness Benchmark for Jailbreaking LLMs" (2024)

@@ -1,5 +1,5 @@
 """
-Benchmark Engine — Orchestrates attacks against raw/guardrailed/SENTINEL.
+Benchmark Engine - Orchestrates attacks against raw/guardrailed/SENTINEL.
 
 The heart of the benchmark. For each attack:
 1. Raw: Send attack to bare model, judge response
@@ -306,7 +306,7 @@ class BenchmarkEngine:
         """Print a summary table to console."""
         summary = run.summary
 
-        table = Table(title=f"\nAttack Success Rate (ASR) — Run {run.run_id}")
+        table = Table(title=f"\nAttack Success Rate (ASR) - Run {run.run_id}")
         table.add_column("Category", style="cyan")
         table.add_column("Raw ASR", style="red")
         table.add_column("Guardrailed ASR", style="yellow")

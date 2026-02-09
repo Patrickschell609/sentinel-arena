@@ -1,5 +1,5 @@
 """
-Custom attacks — GCG suffixes, crescendo, few-shot, and others.
+Custom attacks - GCG suffixes, crescendo, few-shot, and others.
 
 Source: Various published attack techniques (2023-2025)
 - GCG: Zou et al., "Universal and Transferable Adversarial Attacks" (2023)

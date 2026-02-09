@@ -1,5 +1,5 @@
 """
-SENTINEL Action Maps — Predefined mappings from scores to actions.
+SENTINEL Action Maps - Predefined mappings from scores to actions.
 
 The model outputs a number. The number maps to one of a fixed set of
 actions. No text. No explanation. Just: number → action.
@@ -37,7 +37,7 @@ class ActionMap:
         for bound, action in self.thresholds:
             if score <= bound:
                 return action
-        # Score > all bounds — return last action
+        # Score > all bounds - return last action
         return self.thresholds[-1][1]
 
 

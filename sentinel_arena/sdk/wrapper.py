@@ -1,10 +1,10 @@
 """
-SENTINEL Wrapper — Wraps ANY LLM in capability denial.
+SENTINEL Wrapper - Wraps ANY LLM in capability denial.
 
 How it works:
 1. System prompt tells model to output {"score": 0.XX}
 2. Model responds (possibly with jailbreak text mixed in)
-3. Extractor pulls ONLY the first float [0.0-1.0] — everything else discarded
+3. Extractor pulls ONLY the first float [0.0-1.0] - everything else discarded
 4. Float maps to a predefined action via ActionMap
 5. Raw model text NEVER reaches downstream. Ever.
 
@@ -35,7 +35,7 @@ class SentinelResult:
     """Result of a SENTINEL-wrapped LLM call."""
     score: float
     action: Action
-    raw_response_length: int  # Length only — raw text never exposed
+    raw_response_length: int  # Length only - raw text never exposed
     model_id: str
     commitment: Commitment
     extract_failed: bool = False
@@ -93,7 +93,7 @@ class SentinelWrapper:
         try:
             score = extract_score(raw_text)
         except SentinelExtractError:
-            # Model didn't output a valid score — default to max caution
+            # Model didn't output a valid score - default to max caution
             score = 1.0
             extract_failed = True
 

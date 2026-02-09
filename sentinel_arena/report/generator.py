@@ -1,5 +1,5 @@
 """
-Report Generator — Produces HTML + markdown reports from benchmark results.
+Report Generator - Produces HTML + markdown reports from benchmark results.
 """
 
 import json
@@ -121,7 +121,7 @@ def _generate_markdown(
 ):
     """Generate a markdown summary alongside the HTML report."""
     lines = [
-        f"# SENTINEL Arena — Benchmark Report",
+        f"# SENTINEL Arena - Benchmark Report",
         f"",
         f"**Run ID:** {run.run_id}",
         f"**Date:** {run.timestamp}",

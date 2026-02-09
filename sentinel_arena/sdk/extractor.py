@@ -1,9 +1,9 @@
 """
-SENTINEL Extractor — THE security heart.
+SENTINEL Extractor - THE security heart.
 
 This is the entire defense. It extracts ONLY the first float [0.0-1.0]
-from the raw model response. Everything else — jailbreak text, harmful
-content, injected instructions — is discarded.
+from the raw model response. Everything else - jailbreak text, harmful
+content, injected instructions - is discarded.
 
 Even if the model is fully compromised and outputs pages of harmful text,
 only a single number gets through. The jailbreak has nowhere to go.
@@ -62,7 +62,7 @@ def extract_score(raw_response: str) -> float:
         if 0.0 <= val <= 1.0:
             return val
 
-    # Nothing found — the defense holds, no output gets through
+    # Nothing found - the defense holds, no output gets through
     raise SentinelExtractError(
         f"No valid score in [0.0, 1.0] found in response "
         f"({len(raw_response)} chars)"

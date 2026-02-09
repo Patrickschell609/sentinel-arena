@@ -1,5 +1,5 @@
 """
-Role-play / persona attacks — DAN, Developer Mode, etc.
+Role-play / persona attacks - DAN, Developer Mode, etc.
 
 Source: Various published jailbreaks (2023-2025)
 
